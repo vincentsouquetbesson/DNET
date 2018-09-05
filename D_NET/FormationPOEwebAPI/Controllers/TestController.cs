@@ -6,8 +6,10 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
+
 namespace FormationPOEwebAPI.Controllers
 {
+    [RoutePrefix("test")]
     public class TestController : Controller
     {
 
