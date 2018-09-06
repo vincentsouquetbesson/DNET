@@ -1,0 +1,21 @@
+﻿@model List<FormationDotNet.Models.Book>
+@{
+    ViewBag.Title = "Research";
+}
+
+<h2>Research</h2>
+
+<div>
+    <h4>Book</h4>
+    <hr />
+    @foreach (var Book in Model)
+    {
+
+        <dl class="dl-horizontal">
+            <dd>@Book.id</dd>
+            <dd>@Book.title</dd>
+            <dd>@Book.price</dd>
+        </dl>
+    }
+</div>
+
