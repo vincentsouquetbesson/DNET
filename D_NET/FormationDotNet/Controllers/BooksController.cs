@@ -7,6 +7,7 @@ using System.Web;
 using System.Web.Mvc;
 namespace formationPOEwebAPI.Controllers
 {
+
     [RoutePrefix("books")]
     public class BooksController : Controller
     {
@@ -15,22 +16,76 @@ namespace formationPOEwebAPI.Controllers
         {
             return "default book";
         }
-
+/*
         [HttpGet]
         [Route("details")]
         public ActionResult Details()
         {
             return View(db.Books.ToList());
         }
+        */
 
 
 
-    
+
+        [HttpGet]
+        [Route("details")]
+        public ActionResult Details(String title)
+        {
+            Response.Write("<script>console.log('opened window');</script>");
+
+            MediaBdd db = new MediaBdd();
+
+            //String title = "aie";
+            if (title == null)
+            {
+                return View(db.Books
+                    .Select(b => new BookTO
+                    {
+                        Id = b.id,
+                        Title = b.title,
+                        Price = b.price,
+                        PublisherName = b.publisher == null ? "None" : b.publisher.name
+                    })
+                    .ToList());
+    }
+            else
+            {
+                return View(db.Books
+                    .Where(b => b.title.Equals(title))
+                    .Select(b => new BookTO
+                    {
+                        Id = b.id,
+                        Title = b.title,
+                        Price = b.price,
+                        PublisherName = b.publisher == null ? "None" : b.publisher.name
+                    })
+                    .ToList()
+                );
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
         [HttpPost]
         [Route("research")]
-        public ActionResult Research(String title)
+        public ActionResult Research()
         {
+            Response.Write("<script>console.log('opened window');</script>");
+
             MediaBdd db = new MediaBdd();
+
+            String title = "aie";
             if (title == null)
             {
                 return View();
@@ -43,7 +98,7 @@ namespace formationPOEwebAPI.Controllers
                      {
                          Id = b.id,
                          Title = b.title,
-                         //Price = b.price,
+                         Price = b.price,
                          PublisherName = b.publisher == null ? "None" : b.publisher.name
                      })
                     .ToList()
