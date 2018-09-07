@@ -14,12 +14,20 @@
 
     @foreach (var BookTO in Model)
     {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => BookTO.Id)</td>
+            <td>@Html.DisplayFor(modelItem => BookTO.Title)</td>
+            <td>@Html.DisplayFor(modelItem => BookTO.Price)</td>
 
-        <dl class="dl-horizontal">
-            <dd>@BookTO.Id</dd>
-            <dd>@BookTO.Title</dd>
-            <dd>@BookTO.Price</dd>
-        </dl>
+            <td>
+
+                @Html.ActionLink("Edit", "edit", new { id = BookTO.Id })
+                @Html.ActionLink("delete", "delete", new { id = BookTO.Id })
+
+
+
+            </td>
+        </tr>
     }
 
 
