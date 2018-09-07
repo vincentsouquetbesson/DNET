@@ -22,15 +22,13 @@
         </dl>
     }
 
-    @using (Html.BeginForm())
-    {
-        <fieldset></fieldset>
-    }
 
-    <form method="get">
-        <label for="firstName">title :</label>
-        <input type="text" id="title" placeholder="aie" />
-        <input type="submit" />
-    </form>
+    <@using (Html.BeginForm("Details","Books",FormMethod.Get))
+    {
+        <p>
+            Title : @Html.TextBox("SearchingString")<br />
+            <input type="submit" value="Filter" />
+        </p>
+    }
 
 </div>

@@ -30,14 +30,15 @@ namespace formationPOEwebAPI.Controllers
 
         [HttpGet]
         [Route("details")]
-        public ActionResult Details(String title)
+        public ActionResult Details(String searchingString)
         {
-            Response.Write("<script>console.log('opened window');</script>");
+            //Response.Write("<script>console.log(title);</script>");
+            Console.WriteLine(searchingString);
 
             MediaBdd db = new MediaBdd();
 
             //String title = "aie";
-            if (title == null)
+            if (searchingString == null)
             {
                 return View(db.Books
                     .Select(b => new BookTO
@@ -52,7 +53,7 @@ namespace formationPOEwebAPI.Controllers
             else
             {
                 return View(db.Books
-                    .Where(b => b.title.Equals(title))
+                    .Where(b => b.title.Equals(searchingString))
                     .Select(b => new BookTO
                     {
                         Id = b.id,
