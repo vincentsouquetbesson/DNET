@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "PersonalSpace";
+}
+
+<h2>PersonalSpace</h2>
+
+<div class="friend">
+    <h2>Friends</h2>
+    @foreach (var UserTO in (List<UserTO>)ViewData["friends"])
+    {
+    <tr>
+        <td>@Html.DisplayFor(modelItem => UserTO.LastName)</td>
+        <td>@Html.DisplayFor(modelItem => UserTO.FirstName)</td>
+    </tr>
+    }
+</div>
+
+
+

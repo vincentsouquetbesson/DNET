@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<div class="friend">
+    <h2>Friends</h2>
+    @foreach (var UserTO in (List<UserTO>)ViewData["friends"])
+    {
+        <p>
+            @Html.DisplayFor(modelItem => UserTO.LastName)
+            @Html.DisplayFor(modelItem => UserTO.FirstName)
+        </p>
+    }
+</div>
+
+
+<div class="message">
+
+    @foreach (var MessageTO in (List<MessageTO>)ViewData["messages"])
+    {
+        <h2>Message</h2>
+        <p>
+            @Html.DisplayFor(modelItem => MessageTO.User.FirstName)
+            @Html.DisplayFor(modelItem => MessageTO.User.LastName)
+        </p>
+        <p>@Html.DisplayFor(modelItem => MessageTO.Message)</p>
+        <p>Nb like : @Html.DisplayFor(modelItem => MessageTO.Likelist.Count)</p>
+        <p>Date : @Html.DisplayFor(modelItem => MessageTO.Date)</p>
+
+
+        foreach (var CommentTO in MessageTO.Commentlist)
+        { <h3>Comment</h3>
+            <p>
+                @Html.DisplayFor(modelItem => CommentTO.User.FirstName)
+                @Html.DisplayFor(modelItem => CommentTO.User.LastName)
+            </p>
+            <p>@Html.DisplayFor(modelItem => CommentTO.Comment)</p>
+            <p>Nb like : @Html.DisplayFor(modelItem => CommentTO.Likelist.Count)</p>
+            <p>Date : @Html.DisplayFor(modelItem => CommentTO.Date)</p>
+        }
+
+    }
+</div>
+
+
+<@using (Html.BeginForm("Send", "personalspace", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+        <p>
+            Title : @Html.TextBox("Message")<br />
+            <input type="submit" value="Filter" />
+        </p>
+}
